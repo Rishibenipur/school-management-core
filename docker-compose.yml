@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  schoolapi:
+    image: postgres:latest
+    container_name: postgres-db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    networks:
+      - pg-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pg-admin
+    env_file:
+      - .env
+    ports:
+      - "5050:80"
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+
+volumes:
+  pg-data:
